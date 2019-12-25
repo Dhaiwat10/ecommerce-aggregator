@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 
+import axios from 'axios'
+
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -127,13 +129,21 @@ class SignUp extends Component {
         this.setState({formData: newForm})
     }
 
+    onFormSubmitHandler = e => {
+        e.preventDefault()
+
+        axios.post('http://localhost:4000/reg/add-new', this.state.formData)
+            .then(res => alert(res.data.message))
+            .catch(err => alert(err))
+    }
+
     render() {
 
         return (
             <div>
                 <Container>
                     <Typography component='h1' variant='h2'>Sign Up</Typography>
-                    <form>
+                    <form onSubmit={this.onFormSubmitHandler}>
                         <TextField
                             className={classes.TextField}
                             onChange={this.onNameChangeHandler}
