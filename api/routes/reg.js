@@ -16,11 +16,11 @@ router.route('/add-new').post((req, res) => {
     newUser.save()
             .then(() => {
                 console.log('New user saved successfully.')
-                res.json({message: 'New user saved successfully.'})
+                res.status(200).json({message: 'New user saved successfully.'})
             })
             .catch(err => {
                 console.log('Unable to save the new user.')
-                res.json({message: 'Unable to save the new user.', error: err})
+                res.status(522).json({message: 'Unable to save the new user.', errorCode: err.code, errorMessage: err.errmsg})
             })
 })
 
