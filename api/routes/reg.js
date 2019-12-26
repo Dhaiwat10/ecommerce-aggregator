@@ -10,23 +10,18 @@ router.route('/add-new').post((req, res) => {
     let newUserData = req.body
 
     const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        gstin: req.body.gstin,
-        phone: req.body.gstin,
-        password: req.body.password,
-        building: req.body.address.building,
-        street: req.body.address.street,
-        city: req.body.address.city,
-        state: req.body.address.state,
-        pin: req.body.address.pin,
+        ...newUserData
     })
 
     newUser.save()
-            .then(() => console.log('New user saved successfully.'))
-            .catch(err => console.log(err))
-
-    res.json({message: 'Request received. New user added successfully.'})
+            .then(() => {
+                console.log('New user saved successfully.')
+                res.json({message: 'New user saved successfully.'})
+            })
+            .catch(err => {
+                console.log('Unable to save the new user.')
+                res.json({message: 'Unable to save the new user.', error: err})
+            })
 })
 
 module.exports = router
