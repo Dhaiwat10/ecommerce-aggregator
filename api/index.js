@@ -16,5 +16,7 @@ const connection = mongoose.connection
 connection.once('open', () => console.log('Connected to database.'))
 
 const regRouter = require('./routes/reg')
+const localAuthRouter = require('./routes/localAuth')
 
 app.use('/reg', regRouter)
+app.use('/local-auth', localAuthRouter)
