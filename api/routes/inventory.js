@@ -24,7 +24,7 @@ router.route('/add-new-item').post((req, res) => {
         })
 })
 
-router.route('/get-inventory/').get((req, res) => {
+router.route('/get-inventory/').post((req, res) => {
     const sellerEmail = req.body.sellerEmail
 
     Item.find({sellerEmail: sellerEmail}, (err, foundItems) => {
