@@ -72,9 +72,12 @@ class SignIn extends Component {
                 <p>{this.state.resMessage}</p>
             )
             : null
+        
+        let authCheck = this.props.isLoggedIn ? <Redirect to='/dashboard'/> : null
 
         return (
             <div>
+                {authCheck}
                 <Container>
                     <Typography component='h1' variant='h2'>Sign In</Typography>
                     {errorMessage}
@@ -87,7 +90,8 @@ class SignIn extends Component {
                             type='email'
                             variant='outlined'
                             required
-                            autoFocus/>
+                            autoFocus
+                            fullWidth/>
                         <TextField
                             label='Password'
                             className={classes.TextField}
@@ -95,7 +99,8 @@ class SignIn extends Component {
                             value={this.state.formData.password}
                             type='password'
                             variant='outlined'
-                            required/>
+                            required
+                            fullWidth/>
                         <Button
                             className={classes.SubmitButton}
                             type='submit'

@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 
+import {connect} from 'react-redux';
+import { Redirect } from 'react-router-dom'
+
 import axios from 'axios'
 
 import Container from '@material-ui/core/Container'
@@ -46,9 +49,11 @@ class SignUp extends Component {
     }
 
     render() {
+        let authCheck = this.props.isLoggedIn ? <Redirect to='/dashboard'/> : null
 
         return (
             <div>
+                {authCheck}
                 <Container>
                     <Typography component='h1' variant='h2'>Sign Up</Typography>
                     <form onSubmit={this.onFormSubmitHandler}>
@@ -158,4 +163,8 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp
+const mapStateToProps = state => {
+    return {isLoggedIn: state.isLoggedIn}
+}
+
+export default connect(mapStateToProps)(SignUp)
